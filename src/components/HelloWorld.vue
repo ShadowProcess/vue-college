@@ -31,6 +31,13 @@
 </template>
 
 <script>
+//export用于导出 ，Vue单文件组件通常需要导出一个对象
+//这个对象是Vue实例的选项对象，以便于在其它地方可以使用import引入
+
+//export default命令并不是在每个文件中都是必须的。
+//它的作用只是用于导出模块，在别的模块需要调用这个模块的时候，
+//可以通过import命令引入使用的。
+//里面的data()方法要return
 export default {
   name: 'HelloWorld',
   props: {
