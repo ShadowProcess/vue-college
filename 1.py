@@ -16,4 +16,4 @@ def commit(msg):
 if __name__ == '__main__':
     set_sys_date(2019,1,17)        #设置那一天
     set_sys_time()
-    commit("babel是什么")           #想要深色点，最低三个提交
+    commit("webpack是什么")           #想要深色点，最低三个提交
