@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>你好-vue</title>
+</head>
+<body>
+<div id="app">
+  <input type="text">
+</div>
+
+<script>
+  let obj = {};
+  Object.defineProperty(obj,'name',{
+      configurable:true, //是否可配置,就是可以删除
+      writable:false,    //是否可以修改
+      enumerable:false,  //是否可枚举
+      value:1
+  });
+
+  delete obj.name;
+
+  for (let key in obj) {
+      console.log(key);
+  }
+
+
+/////////////////////////////////////////////////////////
+
+
+  Object.defineProperty(obj,'name',{
+     get(){   //取name属性值时会调用
+         return 1;
+     },
+      set(val){ //给obj赋值会触发get方法
+          console.log(val);
+      }
+  });
+
+</script>
+</body>
+</html>

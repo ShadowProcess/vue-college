@@ -14,6 +14,6 @@ def commit(msg):
     os.system('git commit -m %s' % (msg))
 
 if __name__ == '__main__':
-    set_sys_date(2019,1,22)        #设置那一天
+    set_sys_date(2019,1,23)        #设置那一天
     set_sys_time()
-    commit("vue.js用法")           #想要深色点，最低三个提交
+    commit("vue.js-参数设置")           #想要深色点，最低三个提交
