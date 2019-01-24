@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    {{a.school}} <!--如果取一个不存在的，浏览器报警告，未定义-->
+</div>
+
+<script src="../../node_modules/vue/dist/vue.js"></script>  <!--js为什么放到下面执行，防止js先执行，dom未渲染-->
+<script>
+
+    // vue会循环data中的数据(数据劫持) 依次增加getter和setter
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            a:{school:''}
+        }
+    });
+    //使用变量时 先要初始化 否则新加的属性不会导致页面刷新
+
+    //此方式可以给对象添加响应式的数据变化
+    vm.$set(vm.a,"school",1);
+
+    //替换原对象
+    vm.a = {school:'zz',age:8,address:'xxx'};
+</script>
+</body>
+</html>
