@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>你好-vue</title>
+</head>
+<body>
+<div id="app">
+    <!-- moustache 小胡子语法 表达式 可以放赋值-->
+    {{msg}} <!--这种方式刷新 {{}}短暂的出现在页面，但是一般用这个，因为方便-->
+
+
+    <div v-text="msg"></div> <!--这种方式刷新时，防止{{}}出现在页面上-->
+
+
+    <!--v-model会将msg的值赋予输入框，输入框的值改变会影响数据-->
+    <input type="text" v-model="msg">
+
+
+    <!--v-once 只绑定一次 当数据在发生变化 也不导致页面刷新-->
+    <div v-once>
+        {{msg}}
+    </div>
+
+
+    <!--v-html[vue.js的使用] 把html字符当做html渲染,一定是可以信任的HTML-->
+    <div v-html="p"></div>
+</div>
+
+<script src="../../node_modules/vue/dist/vue.js"></script>  <!--js为什么放到下面执行，防止js先执行，dom未渲染-->
+<script>
+
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            msg:'注意src的路径问题',
+            p:'<p>hello</p>'
+        }
+    }); //Object.defineProperty
+</script>
+</body>
+</html>
