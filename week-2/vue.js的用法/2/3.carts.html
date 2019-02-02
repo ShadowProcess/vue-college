@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bootstrap</title>
+    <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+<div id="app" v-cloak>
+
+</div>
+
+<script src="../../../node_modules/vue/dist/vue.js"></script>
+<!--基于promise-->
+<script src="../../../node_modules/axios/dist/axios.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        //专门用来发送AJAX的方法
+        created() { //这个函数在数据(products)被初始化后被调用,this指向指的也是vm实例,钩子函数
+            // promise 解决回调问题的
+            axios.get('./carts.json').then(res => { //success 请求成功
+                console.log(res);
+                console.log(res.data); //获取数据 拿到的需要res.data
+                this.products = res.data;
+            }, err => { //error 返回失败
+                console.log(err);
+            })
+        },
+        methods: {},
+        data: {
+            products: []
+        }
+    });
+</script>
+</body>
+</html>
