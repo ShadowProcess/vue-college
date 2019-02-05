@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bootstrap</title>
+    <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+<div id="app" v-cloak>
+
+</div>
+
+<script src="../../../node_modules/vue/dist/vue.js"></script>
+<script src="5.promise-ajax.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        create() {
+            console.log("--------------")
+            ajax({url: './carts.json'}).then((res) => {
+                console.log(res);
+            }, (err) => {
+                console.log(err);
+            })
+        },
+        data: {
+            products: [
+                {
+                    id: 10001,
+                    isSelected: true,
+                    productCover: 'http://www.',
+                    productName: '深入浅出node',
+                    productInfo: '颜色：所属',
+                    productPrice: 57.8,
+                    productCount: 3
+                },
+                {
+                    id: 10002,
+                    isSelected: true,
+                    productCover: 'http://www.1',
+                    productName: '深入浅出node1',
+                    productInfo: '颜色：所属1',
+                    productPrice: 57.81,
+                    productCount: 32
+                }
+            ]
+        }
+    });
+</script>
+</body>
+</html>

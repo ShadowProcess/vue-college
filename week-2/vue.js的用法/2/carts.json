@@ -1,0 +1,20 @@
+[
+  {
+    "id": 10001,
+    "isSelected": true,
+    "productCover": "https://static.lianglife.com/1.png",
+    "productName": "深入浅出node",
+    "productInfo": "颜色：所属",
+    "productPrice": 57.8,
+    "productCount": 3
+  },
+  {
+    "id": 10002,
+    "isSelected": true,
+    "productCover": "https://static.lianglife.com/1.png",
+    "productName": "深入浅出node1",
+    "productInfo": "颜色：所属1",
+    "productPrice": 57.81,
+    "productCount": 32
+  }
+]

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>你哥购物车</title>
+    <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.css">
+    <style>
+        /*因为bootstrap的css给caption标签定义了样复式：caption-side: bottom;
+        解决办法是自己制写css覆盖掉bootstrap自带的css：
+        caption {
+            text-align: center;
+            caption-side: top;
+        }
+        这样覆盖后表格的caption会在表zhidao格头部居中显示。*/
+        caption {
+            text-align: center;
+            caption-side: top;
+        }
+    </style>
+</head>
+<body>
+<div id="app" v-cloak>
+    <!--bootstrap 栅格化布局 默认12列 (有一些框架可能是8列，24列)-->
+    <!--常见的样式 基本样式+增强样式-->
+    <!--default 灰色 success 成功 绿色  dagger红色 warning警告色-->
+    <!--vue的UI框架 iview,mintui,elementui-->
+    <div class="container">
+        <!--每一行又会拥有12列-->
+        <div class="row">
+            <table class="table table-hover table-bordered">
+                <caption class="h1 text-warning text-center">购物车</caption>
+                <tr>
+                    <!--click点击时 checkbox的状态还没有改变 所以拿到的总是相反的   change可以保证值变化后再触发函数-->
+                    <th>全选 <input type="checkbox" v-model="checkAll"></th>
+                    <td>商品</td>
+                    <td>单价</td>
+                    <td>数量</td>
+                    <td>小计</td>
+                    <td>操作</td>
+                </tr>
+                <tr v-for="(product,index) in products">
+                    <td>
+                        <input type="checkbox" v-model="product.isSelected">
+                    </td>
+                    <td>
+                        <!--:和v-bind等价 指令动态绑定数据-->
+                        <img :src="product.productCover" :title="product.productName" width="30" height="30">
+                        {{product.productInfo}}
+                    </td>
+                    <td>{{product.productPrice}}</td>
+                    <td>
+                        <!--.number是让输入框的值变为数字类型 .lazy是失去焦点时更新数据-->
+                        <input type="number" v-model.number.lazy="product.productCount" min="1"></td>
+                    <td>
+                        <!--￥：{{(product.productPrice * product.productCount).toFixed(2)}}-->
+                        <!--过滤器 原数据不变的情况下 只是改变显示的效果 管道符-->
+                        {{product.productPrice * product.productCount | myToFixed(2)}}
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" @click="remove(product)">删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <!--
+                    sum() 数据一变化就会重新调用此函数 算出最新的结果 性能低，不会缓存上一次的结果
+                    computed可以解决这个问题
+                    -->
+                    <td colspan="6">总价格：{{sum | myToFixed(2)}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script src="../../../node_modules/vue/dist/vue.js"></script>
+<!--基于promise-->
+<script src="../../../node_modules/axios/dist/axios.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        /*
+        当给全选赋值时，要影响其它人的变化，当页面刷新时，获取全选值，是根据下面的checkbox计算出来的结果给全选赋值
+         */
+        computed: { //放在computed中最后也会放在vm上，不能和methods和data重名
+            checkAll: {
+                 //当products值变化时会重新计算
+                get() { //get和set中 this指向实例，默认v-model会获取checkAll的值 所以会调用get方法
+                    return this.products.every(p => p.isSelected);
+                },
+                set(val) { //当给checkbox赋值时候
+                    this.products.forEach(p => p.isSelected = val);
+                }
+            },
+            //sum 只有get方法没有set方法 因为页面只是取值
+            //如果计算属性写成函数，默认调用就是get方法
+            sum: { //sum的结果会被缓存，如果依赖的数据没有变化，就不会重新执行
+                get() {
+                    return this.products.reduce((prev, next) => {
+                        if (!next.isSelected) return prev; //如果当前没被选中，就不加当前这一项
+                        return prev + next.productPrice * next.productCount;
+                    }, 0); //0代表最初的值
+                }
+            }
+        },
+        created() {
+            this.getData();
+        },
+        filters: {
+            myToFixed(input, param) {
+                return '$:' + input.toFixed(param);
+            }
+        },
+        methods: {
+            remove(p) {
+                this.products = this.products.filter(item => item !== p);
+            },
+            getData() {
+                axios.get('./carts.json').then(res => {
+                    this.products = res.data;
+                    this.checkOne(); //数据获取完成后 checkAll赋予默认值
+                }, err => {
+                    console.log(err);
+                });
+            }
+        },
+        data: {
+            products: []
+        }
+    });
+</script>
+</body>
+</html>
