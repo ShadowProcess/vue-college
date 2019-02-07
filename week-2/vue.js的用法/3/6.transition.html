@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div > div {
+            width: 100px;
+            height: 100px;
+            background: #42b983;
+        }
+    </style>
+    <!--npm install animate.css 安装该CSS-->
+    <link rel="stylesheet" href="../../../node_modules/animate.css/animate.css">
+</head>
+<body>
+
+<div id="app">
+
+    <button @click="flag=!flag">切换</button>
+    <transition enter-active-class="fade-in-active" leave-active-class="animated bounceOutDown">
+        <div v-show="flag">我爱你</div>
+    </transition>
+
+    <br>
+    <p class="animated bounce bounce">animated bounce bounce <span class="ml">弹跳</span></p>
+    <p class="animated bounce flash">animated bounce flash<span class="ml">反射闪光</span></p>
+    <p class="animated bounce pulse">animated bounce pulse<span class="ml">反弹脉冲 </span></p>
+    <p class="animated bounce rubberBand">animated bounce rubberBand<span class="ml">跳橡皮筋 </span></p>
+    <p class="animated bounce shake">animated bounce shake<span class="ml">弹抖 </span></p>
+    <p class="animated bounce swing">animated bounce swing<span class="ml">弹跳摆动 </span></p>
+    <p class="animated bounce tada">animated bounce tada<span class="ml">弹跳多田 </span></p>
+    <p class="animated bounce wobble">animated bounce wobble<span class="ml">弹跳抖动 </span></p>
+    <p class="animated bounce jello">animated bounce jello<span class="ml">弹跳果冻</span></p>
+</div>
+
+
+<script src="../../../../node_modules/vue/dist/vue.js"></script>
+
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            flag: true
+        }
+    });
+</script>
+</body>
+</html>

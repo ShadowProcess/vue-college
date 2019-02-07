@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div > div {
+            float: left; /*避免div自动换行*/
+            width: 100px;
+            height: 100px;
+            background: #42b983;
+        }
+
+        div > span {
+            width: 500px;
+            height: 500px;
+            background: #2661d5;
+        }
+    </style>
+    <!--npm install animate.css 安装该CSS-->
+    <link rel="stylesheet" href="../../../node_modules/animate.css/animate.css">
+</head>
+<body>
+
+<div id="app">
+    <div class="animate__animated animate__fadeInLeftBig animate__delay-2s animate__repeat-3">向左淡出</div>
+    <br>
+    <div class="animate__animated animate__bounce animate__delay-2s animate__repeat-3">小宝</div>
+    <br>
+    <div class="animate__animated animate__rotateIn animate__delay-2s animate__repeat-3">小宝</div>
+    <br>
+    <div class="animate__animated animate__flip animate__delay-2s animate__repeat-3">小宝</div>
+    <br>
+    <div class="animate__animated animate__strong animate__delay-2s animate__repeat-3">小宝</div>
+    <br>
+    <div class="animate__animated animate__fadeIn animate__delay-2s animate__repeat-3">小宝</div>
+    <br>
+    <div class="animate__animated animate__fadeInBottomLeft animate__delay-2s animate__repeat-3">新</div>
+    <br>
+    <div class="animate__animated animate__fadeOutUpBig animate__delay-2s animate__repeat-3">新的</div>
+    <br>
+    <div class="animate__animated animate__shakeX animate__delay-2s animate__repeat-3">新的</div>
+    <br>
+    <div class="animate__animated animate__jackInTheBox animate__delay-2s animate__repeat-3">新的</div>
+    <br>
+    <div class="animate__animated animate__shakeY animate__delay-2s animate__repeat-3">新的</div>
+    <br>
+    <div class="animate__animated animate__rotateIn animate__delay-2s animate__repeat-3">新的</div>
+    <br>
+    <div class="animate__animated animate__flip animate__delay-2s animate__repeat-3">新的</div>
+    <br>
+    <div class="animate__animated animate__backInDown animate__delay-2s animate__repeat-3">新的</div>
+    <br>
+
+    <button @click="flag=!flag">切换</button>
+    <input type="text" v-model="query">
+
+    <div v-if="flag">
+        <div>{{query}}</div>
+    </div>
+</div>
+
+
+<script src="../../../../node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        computed: {
+            newArr() {
+                return this.arr.filter(item => item == this.query);
+            }
+        },
+        data: {
+            query: '',
+            flag: true,
+            arr: [1, 2, 3, 4, 5]
+        }
+    });
+</script>
+</body>
+</html>
