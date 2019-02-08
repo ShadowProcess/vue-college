@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <style>
+        .del{
+            text-decoration: line-through;color: #cccccc !important;
+        }
+        .active{
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <nav class="navbar navbar-nav" style="background: green">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    ToDoList
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-warning">
+                    <div class="panel-heading text-danger" style="background: #778b59">
+                        亲~ ^_^ 你有 {{count}} 件事要完成
+                        <input type="text" class="form-control" v-model="title" @keyup.13="add">
+                    </div>
+                    <div class="panel-body" style="background: #597d8b">
+                        <ul class="list-group">
+                            <li class="list-group-item" v-for="(todo,index) in filterTodos" @dblclick="remember(todo)">
+                                <!--如果isSelected为true，del则生效-->
+                                <!--当我点击li，我可以知道点击的是哪一项,如果我点击的todo和当前循环的某一个相等的时候 应该显示输入框-->
+                                <span :class="{del:todo.isSelected}" v-show="cur!=todo">
+                                    <input type="checkbox" v-model="todo.isSelected">
+                                    {{todo.title}}
+                                </span>
+                                <input type="text"
+                                       v-model="todo.title"
+                                       v-show="cur==todo"
+                                       @keyup.enter="cancel"
+                                       @blur="cancel"
+                                       v-focus="cur==todo">
+
+                                <button class="float-right btn btn-danger btn-xs" @click="remove(todo)">&bigotimes;</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="panel-footer">
+                        <ul class="nav nav-tabs nav-justified">
+                            <li role="presentation" :class="{active:hash==='all'}"><a href="#/all">全部</a></li> &nbsp;&nbsp;&nbsp;
+                            <li role="presentation" :class="{active:hash==='finish'}"><a href="#/finish">已完成</a></li> &nbsp;&nbsp;&nbsp;
+                            <li role="presentation" :class="{active:hash==='unfinish'}"><a href="#/unfinish">未完成</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="node_modules/axios/dist/axios.js"></script>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script src="todo.js"></script>
+</body>
+</html>

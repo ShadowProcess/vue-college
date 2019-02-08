@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>这是一个自建独立的模块</title>
+</head>
+<body>
+
+<!--提交2-->
+<div id="app">
+    <!--.capture 表示是捕获的意思，点击孙子时最先触发-->
+    <div @click.capture="parent"> parent
+        <div @click="child"> child
+            <div @click="grandson"> grandson</div>
+        </div>
+    </div>
+
+    <div @click.self="fn"></div> 只有点击自己才触发
+    <div @click.once="fn"></div> 只会触发一次点击事件
+
+    <a href="" @click.prevent="fn">超链接只触发函数，不跳转</a>
+</div>
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        methods: {
+            parent() {
+                alert(1)
+            },
+            child() {
+                alert(2)
+            },
+            grandson(e) {
+                e.cancelBubble = true;  //可以组织冒泡排序
+                //e.stopPropagation=true  都是阻止冒泡排序
+                //@click.stop  也可以阻止冒泡排序
+                alert(3)
+            },
+        },
+        data: {}
+    })
+</script>
+</body>
+</html>
