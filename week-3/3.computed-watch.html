@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="a">
+    {{msg}}
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            a: '',
+            msg: ''
+        },
+        watch: { //只有值变化的时候才会触发 支持异步,其它情况更善于使用computed
+            a(newVal, oldVal) {  //watch的属性名字要和观察的人的名字一致
+                console.log(newVal, oldVal);
+
+                setTimeout(() => {
+                    if (newVal.length < 3) {
+                        return this.msg = '太少';
+                    }
+                    if (newVal.length > 6) {
+                        return this.msg = '太多';
+                    }
+                    this.msg = '';
+                }, 2000);
+            }
+        }
+    });
+</script>
+</body>
+</html>
+
+<!--computed: {
+a:{ //如果写了set方法，并且val给了别人，那么当前a就不会被赋予结果了
+    get(){
+
+    },
+set(val){
+    this.msg = val;
+}
+}
+},-->

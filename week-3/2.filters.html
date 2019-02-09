@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--提交3-->
+<div id="app1">
+    {{'hello' | my}}
+</div>
+
+<div id="app2">
+    {{'hello' | my}}
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    //这个过滤器在所有实例上都生效,而且代码位置必须放到，下面new的上面
+    Vue.filter('my', (data)=>{
+            return 'jw'+data;
+    })
+
+    new Vue({
+        el:'#app1',
+        filters:{
+            my(data){
+                return 'jw'+data;
+            }
+        },
+        data:{
+
+        }
+    });
+
+    new Vue({
+        el:'#app2',
+        data:{
+
+        }
+    });
+</script>
+</body>
+</html>

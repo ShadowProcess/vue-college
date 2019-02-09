@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    全选 <input type="checkbox" v-model="checkAll"> <br>
+    <input type="checkbox" v-for="p in products" v-model="p.isSelected">
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    //这个过滤器在所有实例上都生效,而且代码位置必须放到，下面new的上面
+    Vue.filter('my', (data) => {
+        return 'jw' + data;
+    })
+
+    new Vue({
+        el: '#app',
+        computed: {
+            checkAll: {
+                get() { //返回什么结果，就会赋予给checkAll
+                    return this.products.every(item => item.isSelected)
+                },
+                set(val) { //val是给checkAll赋予值的时候传递过来的
+                    this.products.forEach(item => item.isSelected = val);
+                }
+            }
+        },
+        data: {
+            products: [{isSelected: true}, {isSelected: true}]
+        }
+    });
+</script>
+</body>
+</html>
