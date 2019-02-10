@@ -16,4 +16,4 @@ def commit(msg):
 if __name__ == '__main__':
     set_sys_date(2019,2,10)     #设置那一天
     set_sys_time()
-    commit("v-if与v-else")            #想要深色点，最低三个提交
+    commit("v-bind")            #想要深色点，最低三个提交
