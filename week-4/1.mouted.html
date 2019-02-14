@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <p ref="myp">{{msg}}</p>
+
+    <div v-for="a in 5" ref="mydiv">
+        {{a}}
+    </div>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    //生命周期： beforeCreate created
+    //         beforeMount  mounted
+    //         beforeUpdate updated
+    //         beforeDestroy destroyed
+    //  this.$nextTick(()=>{ //保证dom渲染完毕，调用此方法，vue提供的
+    //      alert(vm);
+    //  })
+    //根实例，初始化时会调用很多方法（钩子函数）
+
+    //挂载的意思：就是把页面渲染完毕后，扔到浏览器里
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            msg:'888'
+        },
+        // $data     vm上的数据
+        // $watch    监控
+        // $el       当前el元素
+        // $set      后加的属性实现响应式变化
+        // $options  vm上的所有属性
+        // $refs
+        mounted() {
+            //如果dom元素不是通过v-for循环出来的 只能获取到一个 通过v-for循环出来的可以获取多个
+            console.log(this.$refs.myp);
+            alert(this.$refs.mydiv);
+        }
+    });
+
+    //如果数据变化后想获取真实dom中的内容，那么需要套上
+    //  this.$nextTick(()=>{ //保证dom渲染完毕，调用此方法，vue提供的
+    //      todo...
+    //  })
+
+</script>
+</body>
+</html>
