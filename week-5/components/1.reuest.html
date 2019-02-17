@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    {{response}}
+</div>
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/axios/dist/axios.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            response:''
+        },
+        created(){
+            axios.get('http://localhost:8080/api/test').then(res => {
+                this.response = res.data;
+            }, err => {
+                console.log(err);
+            });
+        }
+    })
+</script>
+</body>
+</html>

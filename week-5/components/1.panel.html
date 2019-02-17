@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+<div id="app">
+  <panel type="primary"></panel>
+  <panel type="danger"></panel>
+  <panel type="warning"></panel>
+</div>
+
+<template id="panel">
+    <div class="panel" :class="[color]">
+        <div class="panel-heading"></div>
+        <div class="panel-body"></div>
+        <div class="panel-footer"></div>
+    </div>
+</template>
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/axios/dist/axios.js"></script>
+<script>
+    let panel = {
+        template: '#panel',
+        computed:{
+            color(){
+                return 'panel-'+this.type;
+            }
+        },
+        props:{
+            type:{ //this.type = 'primary'  子不能更改父组件传递的属性
+                type:[String],
+                default:'default'
+            }
+        }
+    };
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            response:''
+        },
+        components:{
+            panel
+        }
+    })
+</script>
+</body>
+</html>
