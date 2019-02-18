@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .active{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <!--router-view是一个全局组件，可以直接使用-->
+    <!--
+    <a href="#/home">首页</a>
+    <a href="#/list">列表页</a>
+    -->
+    <router-link to="/home" tag="button">首页</router-link>
+    <router-link to="/list" tag="button">列表页</router-link>
+    <router-view></router-view>
+</div>
+
+<!--
+前后端分离 后端只负责提供前端调用 像跳转都是前端自己处理的
+
+hash模式 #   （开发时使用hash模式，不会导致404问题 hash方式不支持seo）
+h5的history.pushState （上线时采用这种方式）
+-->
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<!--必须放在vue的后面-->
+<script src="node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    let home = {template: '<div>首页</div>'};
+    let list = {template: '<div>列表页</div>'};
+
+    let routes = [  //路由的映射表 配置路径和组件的关系
+        {path: '/home', component: home}, //配置的关系就是页面级组件
+        {path: '/list', component: list}
+    ];
+    let router = new VueRouter({  //引入vue-router自带的VueRouter类
+        mode:'history', //TODO h5模式
+        routes:routes,
+        linkActiveClass:'active' //更改默认样式的类名 默认叫router-link-active
+    });
+
+    let vm = new Vue({
+        el: '#app',
+        router:router
+    })
+    //http://localhost:63342/myvue/week1-day5/1.router.html?_ijt=39oc5mi20181b9esidvaedt52e#/
+</script>
+</body>
+</html>
