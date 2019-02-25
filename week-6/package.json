@@ -1,0 +1,36 @@
+{
+  "name": "vue-load",
+  "version": "1.0.0",
+  "description": "- 下载一个全局生成的vue项目的脚手架\r ```\r npm install vue-cli -g",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack-dev-server",
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "css-loader": "^0.28.11",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^2.30.1",
+    "less": "^3.11.1",
+    "less-loader": "^4.1.0",
+    "style-loader": "^0.19.1",
+    "url-loader": "^0.6.2",
+    "vue-loader": "^13.3.0",
+    "vue-template-compiler": "^2.5.2",
+    "webpack": "^3.12.0",
+    "webpack-dev-server": "^3.1.11"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "vue": "^2.5.2",
+    "vue-router": "^3.0.1"
+  },
+  "keywords": []
+}
