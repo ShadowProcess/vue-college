@@ -20,9 +20,9 @@ export default new Router({
       component: Home,
       meta: {
         keepAlive: true,
-        title:'首页'
+        title: '首页'
       }
-    },// this.$route.meta.keepAlive
+    }, // this.$route.meta.keepAlive
     {
       path: '/collect',
       component: Collect,

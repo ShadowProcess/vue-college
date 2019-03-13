@@ -16,4 +16,4 @@ def commit(msg):
 if __name__ == '__main__':
     set_sys_date(2019,3,13)         #设置那一天
     set_sys_time()
-    commit("完成")                #想要深色点，最低三个提交
+    commit("总结")                #想要深色点，最低三个提交
