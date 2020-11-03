@@ -16,14 +16,14 @@
 </template>
 
 <script>
-  import Tab from './base/Tab.vue'
+import Tab from './base/Tab.vue'
 
-  export default {
-    name: 'App',
-    components: {
-      Tab:Tab
-    }
+export default {
+  name: 'App',
+  components: {
+    Tab: Tab
   }
+}
 </script>
 
 <style>

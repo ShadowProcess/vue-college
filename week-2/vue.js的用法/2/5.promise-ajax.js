@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 function ajax(url = '', type = 'get', dataType = 'json') {
     return new Promise((resolve, reject) => {
         let xhr = new XMLHttpRequest();

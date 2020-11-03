@@ -29,14 +29,14 @@
 
 <script>
   import {addBook} from '../api';
-  import MHeader from "../base/MHeader";
+  import MHeader from '../base/MHeader';
 
   export default {
-    data(){
-      return {book:{}}
+    data() {
+      return {book: {}}
     },
-    methods:{
-      async add(){
+    methods: {
+      async add() {
         await addBook(this.book);
         this.$router.push('/list');
       }
@@ -52,6 +52,7 @@
 <style scoped lang="less">
   ul {
     margin: 50px 10px 0 10px;
+
     li {
       label {
         font-size: 25px;
